@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<!--常识：Maven是基于项目对象模型，全程：Projext Objext Model-->
+	<!--1》modelVersion：pom.xml模型版本，
+	  maven2.0 和 maven3.0 使用的模型版本都是4.0.0
+	  2》groupId：表示项目创建的团队或组织唯一的标识符，通常是域名
+	  3》artifactId：表示artifact唯一的标识符，通常是项目名称
+	  拓展：
+	  1.（x,y）——》(groupId,artifactId)
+	  2.加上，我们把groupId,artifactId统称为仓库的“坐标”，是为了保证项目的唯一性而提出来的
+	  3.groupId我们一般分为两段，第一段为域，第二段为公司名称(个人)
+	    eg.域： org(非营利组织) com(商业组织) cn(中国)
+	  4.artifactId：项目名称
+	  综合：org.apache.tomcat   org(非营利组织)  apache(公司名称) tomcat(项目名)
+	  4》version：表示项目打包的版本号
+	  5》packaging：表示项目打包的方式  拓展：jar wer pom ejb
+	-->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.tt</groupId>
+	<artifactId>springruan3</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>jar</packaging>
+
+	<!--
+	  1》name:标识项目的名称，一般他和artifactId是一样的
+	  2》description：对这个项目的一个描述
+	-->
+	<name>springruan3</name>
+	<description>Demo project for Spring Boot</description>
+
+	<!--
+	  回顾：SpringBoot的理念：约定优先于配置   maven的原则：开箱即用
+	  1.这里的约定，是表示当前项目和他父亲的约定
+	  2.这里的即用，是表示当前项目使用他父亲的东西
+	  学习：
+	  1.maven项目之间的继承关系通过<parent>表示，记住只有一个爹
+	  2.下面<maven>标签的代码，就表示了当前项目他父亲的信息
+      3.relativePath：表示父项目相对于子项目的路径，
+        这样在构建子项目时，首先先从该相对路径查找父项目，
+        如果没有会从本地库或者远程库进行查找
+	-->
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.1.0.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<!--
+	  pom全局常量配置，从这配置完，整个上下文都可以使用
+	-->
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<!--
+	  dependencies:表示依赖，在子节的dependency中添加具体依赖的“坐标”，
+	               就能把对应的jar导入到项目中，方便项目使用
+	-->
+	<dependencies>
+		<!--1.加入了SpringBoot的web依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		<!--2.加入了SpringBoot的测试依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-test</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!--3.加入ThymeLeaf的模板引擎的依赖-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-thymeleaf</artifactId>
+			<version>2.1.0.RELEASE</version>
+		</dependency>
+		<!--下列8,9,10是springBoot对JSP的支持-->
+		<!--8.添加Servlet的依赖-->
+		<dependency>
+		<groupId>javax.servlet</groupId>
+		<artifactId>javax.servlet-api</artifactId>
+	</dependency>
+		<!--9.添加对JSTL的依赖-->
+		<dependency>
+			<groupId>javax.servlet</groupId>
+			<artifactId>jstl</artifactId>
+			<version>1.2</version>
+		</dependency>
+		<!--10.添加对jsaper的依赖，对JSP支持-->
+		<dependency>
+			<groupId>org.apache.tomcat.embed</groupId>
+			<artifactId>tomcat-embed-jasper</artifactId>
+			<version>9.0.13</version>
+		</dependency>
+
+
+	</dependencies>
+
+	<!--构建配置-->
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+
+
+</project>

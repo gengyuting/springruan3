@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Title</title>
+</head>
+<body>
+     <!--1.引入查询学生信息的请求URL-->
+     <a th:href="@{/student/getStudentAll}">查询所有学生信息</a>
+     <!--2.引入登录页的js-->
+     <a th:href="@{static/js/login.js}">登录页的js</a>
+     <!--3.引入登录页的CSS样式-->
+     <a th:href="@{static/css/login.css}">登录页的CSS样式</a>
+     <br/>
+    <span th:text="|request接收到的：${request_name}|"></span>
+     <br/>
+     <span th:text="|session接收到的：${session.session_name}|"></span>
+     <br/>
+     <span th:text="|application接收到的：${application.application_name}|"></span>
+     <br/>
+     10除以2的结果 等于 5吗？ <span th:text="(10 / 2)==5"></span>
+     <br/>
+     10大于2吗？<span th:text="10 &gt; 2"></span>
+     <br/>
+     <!--如果1==1，我就打篮球，或者打游戏-->
+     <span th:if="1==1">
+         打篮球
+     </span>
+     <span th:unless="1==1">
+         打游戏
+     </span>
+     <br/>
+    <!--如果等于a,就看电影，如果等于b,就学习，如果什么都没有，就打篮球-->
+    <div th:switch="b">
+        <span th:case="'a'">看电影</span>
+        <span th:case="'b'">学习</span>
+        <span th:case="'*'">打篮球</span>
+    </div>
+    <br/>
+    <!--循环遍历一下StudentController里/login请求，给的数据-->
+    <table width="497" height="190" border="1">
+     <tr>
+         <td colspan="3" align="center">学生查询系统</td>
+     </tr>
+     <tr>
+         <td width="163" align="center">学号</td>
+         <td width="123" align="center">密码</td>
+         <td width="189" align="center">操作</td>
+     </tr>
+     <tr th:each="student : ${studentList}">
+         <td align="center" th:text="${student.studentNo}">&nbsp;</td>
+         <td align="center" th:text="${student.studentName}">&nbsp;</td>
+         <td align="center"><a href="#">编辑  删除</a></td>
+     </tr>
+     </table>
+    1.List集合的大小：<span th:text="${#lists.size(studentList)}"/>
+    <br/>
+    2.字符串的长度是：<span th:text="${#strings.length(phone)}"/>
+    <br/>
+    3.日期的格式是：<span th:text="${#dates.format(date,'yyyy-MM-dd HH:mm:ss')}"/>
+    <br/>
+</body>
+</html>

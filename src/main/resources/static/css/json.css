@@ -1,0 +1,7 @@
+/*类样式，居中*/
+.center{
+    text-align: center;
+}
+#trStudent tr td{
+    text-align: center;
+}

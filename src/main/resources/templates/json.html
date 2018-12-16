@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--1.引入CSS样式-->
+    <link th:href="@{/static/css/json.css}" rel="stylesheet">
+    <!--2.引入jQuery的核心文件-->
+    <script th:src="@{/static/js/jquery.min.js}"></script>
+</head>
+<body>
+<input type="button" value="查询学生信息" id="stuBtn">
+<table width="338" height="155" border="2">
+    <tr>
+        <th colspan="2" scope="col">学生信息表</th>
+    </tr>
+    <tr>
+        <th width="156" align="center" valign="middle" scope="row">学号</th>
+        <td width="164" align="center" valign="middle">名称</td>
+    </tr>
+    <tbody id="trStudent">
+
+
+
+    </tbody>
+</table>
+
+</body>
+
+<!--使用ajax发送异步请求，获取json数据，并且将json数据渲染到页面上-->
+<script type="text/javascript">
+    $(function () {
+        $("#stuBtn").click(function () {
+            $.ajax({
+                url:"/ruan3/student/getStudent", //1.url表示Ajax请求的地址
+                type:"get",      //2.type表示请求的方式，用GET方式
+                dataType:"json",  //3.dataType表示：预期返回数据的类型
+                asyac:true,    //4.asyac表示：是否开启异步，肯定是开启true
+                success:function (data) {
+                    //5.success表示:请求成功之后要做的事情
+                    //先看一下数据传送到前端了吗?先验货
+                    //console.log(data);
+                    var pin = "";
+                    for(var i = 0 ; i<data.length;i++){
+                        pin+="<tr><td>"+data[i].studentNo+"</td><td>"+data[i].studentName+"</td></tr>"
+                    }
+                    //把拼接的字符串变为HTML
+                    $("#trStudent").html(pin);
+                },
+                error:function () {
+                    //6.error表示：请求失败之后要做的事情
+                    alert("宋策，正在维护中……")
+                }
+            })
+        })
+    })
+
+</script>
+</html>
